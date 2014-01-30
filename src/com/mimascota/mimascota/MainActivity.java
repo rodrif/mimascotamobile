@@ -1,8 +1,10 @@
 package com.mimascota.mimascota;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends FragmentActivity {
 
@@ -18,4 +20,12 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	public void onClickSacarFoto(View Boton) {
+		SubirFoto frag
+        =(SubirFoto)getSupportFragmentManager()
+            .findFragmentById(R.id.fragment1);
+		frag.onClickSacarFoto(Boton);
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.mimascota.mimascota;
 
 import java.io.File;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,65 +10,52 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 public class SubirFoto extends Fragment {
 	private Uri outputFileUri;
 
-	private static final int TAKE_PICTURE = 5;
-
+	 private static final int TAKE_PICTURE = 5;
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	    public View onCreateView(LayoutInflater inflater,
+	                             ViewGroup container,
+	                             Bundle savedInstanceState) {
+	 
+	        return inflater.inflate(R.layout.fragment_subir_foto, container, false);
+	    }
+	 
+	    @Override
+	    public void onActivityCreated(Bundle state) {
+	        super.onActivityCreated(state);	 
 
-		View view = inflater.inflate(R.layout.fragment_subir_foto, container,
-				false);
-
-		final Button button = (Button) view.findViewById(R.id.bSacarFoto);
-		button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				onClickSacarFoto(v);
-			}
-		});
-
-		return view;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle state) {
-		super.onActivityCreated(state);
-
-	}
-
-	public void onClickSacarFoto(View Boton) {
-		// FIXME
-		// Create an output file.
-		File file = new File(Environment.getExternalStorageDirectory(),
-				"test.jpg");
-		outputFileUri = Uri.fromFile(file);
-		// Generate the Intent.
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-		// Launch the camera app.
-		startActivityForResult(intent, TAKE_PICTURE);
-		// startActivityForResult(
-		// new Intent(MediaStore.ACTION_IMAGE_CAPTURE), TAKE_PICTURE);
-	}
-
-	public void onClickSubirFoto(View Boton) {
-		// TODO
-	}
+	    }
+	    
+	    public void onClickSacarFoto(View Boton) {
+	    	//FIXME
+	    	// Create an output file.
+//	    	File file = new File(Environment.getExternalStorageDirectory(),
+//	    	"test.jpg");
+//	    	outputFileUri = Uri.fromFile(file);
+//	    	// Generate the Intent.
+//	    	Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+//	    	// Launch the camera app.
+//	    	startActivityForResult(intent, TAKE_PICTURE);
+	    	startActivityForResult(
+	    			new Intent(MediaStore.ACTION_IMAGE_CAPTURE), TAKE_PICTURE);
+	    }
+	    
+	    public void onClickSubirFoto(View Boton) {
+	    	//TODO
+	    }
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == TAKE_PICTURE) {
-			ImageView imageView = (ImageView) getView()
-					.findViewById(R.id.vFoto);
+			ImageView imageView = (ImageView)getView().findViewById(R.id.vFoto);
 			// Check if the result includes a thumbnail Bitmap
 			if (data != null) {
 				if (data.hasExtra("data")) {
@@ -96,9 +84,8 @@ public class SubirFoto extends Fragment {
 				Bitmap bitmap = BitmapFactory.decodeFile(
 						outputFileUri.getPath(), factoryOptions);
 				imageView.setImageBitmap(bitmap);
-				Log.d("MiMascota", "imagen entera cargada");
 			}
 		}
-	}
+	}	    
 
 }

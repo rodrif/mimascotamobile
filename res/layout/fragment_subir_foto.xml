@@ -12,22 +12,20 @@
 
     <ImageView
         android:id="@+id/vFoto"
-        android:layout_width="match_parent"
-        android:layout_height="179dp"
-        android:adjustViewBounds="false"
-        android:contentDescription="@string/FotoASubir"
+        android:layout_width="128dp"
+        android:layout_height="191dp"
         android:src="@drawable/perro" />
 
     <Button
         android:id="@+id/bSacarFoto"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
+        android:onClick="onClickSacarFoto"
         android:text="@string/SacarFoto" />
 
     <Button
         android:id="@+id/bSubirFoto"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/SubirFoto" />
 
