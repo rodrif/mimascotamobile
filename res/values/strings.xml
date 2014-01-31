@@ -14,6 +14,11 @@
     <string name="SubirFoto">Subir Foto</string>
     <string name="FotoASubir">Foto a subir</string>
     <string name="LlenarFormulario">Llenar Formulario</string>
-    <string name="title_activity_formulario">Formulario</string>    
+    <string name="title_activity_formulario">Formulario</string>
+    <string name="Ok">Ok</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Direccion">Direccion</string>
+    <string name="Color">Color</string>
+    <string name="Raza">Raza</string>    
 
 </resources>

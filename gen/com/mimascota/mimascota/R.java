@@ -28,21 +28,27 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080000;
-        public static final int action_settings=0x7f080009;
-        public static final int bConectar=0x7f080004;
-        public static final int bFormulario=0x7f080008;
-        public static final int bSacarFoto=0x7f080006;
-        public static final int bSubir=0x7f080007;
-        public static final int ePassword=0x7f080003;
-        public static final int eUsuario=0x7f080002;
+        public static final int action_settings=0x7f08000e;
+        public static final int bConectar=0x7f080009;
+        public static final int bFormulario=0x7f08000d;
+        public static final int bOkFormulario=0x7f080006;
+        public static final int bSacarFoto=0x7f08000b;
+        public static final int bSubir=0x7f08000c;
+        public static final int ePassword=0x7f080008;
+        public static final int eUsuario=0x7f080007;
         public static final int fragment1=0x7f080001;
-        public static final int vFoto=0x7f080005;
+        public static final int tBreed=0x7f080005;
+        public static final int tColor=0x7f080003;
+        public static final int tDireccion=0x7f080004;
+        public static final int tNombre=0x7f080002;
+        public static final int vFoto=0x7f08000a;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int fragment_formulario=0x7f030001;
-        public static final int fragment_login=0x7f030002;
-        public static final int fragment_subir_foto=0x7f030003;
+        public static final int activity_formulario=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int fragment_formulario=0x7f030002;
+        public static final int fragment_login=0x7f030003;
+        public static final int fragment_subir_foto=0x7f030004;
     }
     public static final class menu {
         public static final int formulario=0x7f070000;
@@ -52,11 +58,16 @@ public final class R {
         public static final int subir_foto=0x7f070004;
     }
     public static final class string {
+        public static final int Color=0x7f050011;
         public static final int Conectar=0x7f050005;
+        public static final int Direccion=0x7f050010;
         public static final int FotoASubir=0x7f05000b;
         public static final int FotoSubidaCorrectamente=0x7f050008;
         public static final int LlenarFormulario=0x7f05000c;
+        public static final int Nombre=0x7f05000f;
+        public static final int Ok=0x7f05000e;
         public static final int Password=0x7f050004;
+        public static final int Raza=0x7f050012;
         public static final int SacarFoto=0x7f050009;
         public static final int SubirFoto=0x7f05000a;
         public static final int Usuario=0x7f050003;

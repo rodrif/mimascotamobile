@@ -8,9 +8,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FormularioFragment" >
 
-    <TextView
+    <EditText
+        android:id="@+id/tNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="72dp"
+        android:ems="10"
+        android:hint="@string/Nombre" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/tColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tNombre"
+        android:layout_below="@+id/tNombre"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="@string/Color" />
+
+    <EditText
+        android:id="@+id/tDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tBreed"
+        android:layout_below="@+id/tBreed"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="@string/Direccion" />
+
+    <EditText
+        android:id="@+id/tBreed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tColor"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="@string/Raza" />
+
+    <Button
+        android:id="@+id/bOkFormulario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tDireccion"
+        android:layout_below="@+id/tDireccion"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="47dp"
+        android:text="@string/Ok" />
 
 </RelativeLayout>

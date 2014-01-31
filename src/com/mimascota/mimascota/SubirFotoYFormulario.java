@@ -97,10 +97,10 @@ public class SubirFotoYFormulario extends Fragment {
         String miFoto = ruta_sd.getAbsolutePath()+"/i.jpeg";
 		  try {
 	            JSONObject jsonObject = new JSONObject();
-	            jsonObject.accumulate("id", "2");
+	//            jsonObject.accumulate("id", "2");
 	            jsonObject.accumulate("age", "20");
 	            jsonObject.accumulate("breed", "agagaegfag");
-	            jsonObject.accumulate("user_id", "agagaegfag");
+	            jsonObject.accumulate("user_id", "1");
 	            jsonObject.accumulate("color", "agagaegfag");
 	            jsonObject.accumulate("description", "agagaegfag");
 	            jsonObject.accumulate("name", "Juan2");
@@ -114,7 +114,7 @@ public class SubirFotoYFormulario extends Fragment {
               HttpClient httpclient = new DefaultHttpClient();
               httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
               HttpPost httppost = new HttpPost("http://192.168.1.36:3000/cargador/subirPerroEncontrado");
-        //      HttpPost httppost = new HttpPost("http://192.168.1.40/subir2");
+        //     HttpPost httppost = new HttpPost("http://192.168.1.40/subir2");
               File file = new File(miFoto);
               MultipartEntity mpEntity = new MultipartEntity();
               ContentBody foto = new FileBody(file, "image/jpeg");
@@ -122,63 +122,6 @@ public class SubirFotoYFormulario extends Fragment {
               mpEntity.addPart("jsonString", new StringBody(jsonString));
               httppost.setEntity(mpEntity);
               httpclient.execute(httppost);
-           //   httpclient.getConnectionManager().shutdown(); 
-		  
-			  
-			  
-/*	            HttpClient httpclient = new DefaultHttpClient();
-	            Log.d("InputStream", "onClick2");
-	            // 2. make POST request to the given URL
-	            HttpPost httpPost = new HttpPost("http://192.168.1.36:3000/cargador/subirPerroEncontrado");//FIXME
-	 
-	            String jsonString = "";
-	            
-	            Log.d("InputStream", "onClick3");
-	            
-	            // 3. build jsonObject
-	            JSONObject jsonObject = new JSONObject();
-	            jsonObject.accumulate("name", "Juan2");
-	            jsonObject.accumulate("latitude", "-25.4198");
-	            jsonObject.accumulate("longitude", "-40.3012");
-	            jsonObject.accumulate("gmaps", "true");
-	      //      jsonObject.accumulate("country", "Argentina");
-	            
-	            Log.d("InputStream", "onClick4"); 
-	            
-	            // 4. convert JSONObject to JSON to String
-	            jsonString = jsonObject.toString();
-	            Log.d("InputStream", "String" + jsonString);
-	 
-	            // ** Alternative way to convert Person object to JSON string usin Jackson Lib 
-	            // ObjectMapper mapper = new ObjectMapper();
-	            // json = mapper.writeValueAsString(person); 
-	 
-	            // 5. set json to StringEntity
-	  //          StringEntity se = new StringEntity(jsonString);
-	            
-	//  		  	List<NameValuePair> params = new ArrayList<NameValuePair>();
-	  		  	params.add(new BasicNameValuePair("jsonstring",jsonString));
-	 
-	            // 6. set httpPost Entity	            
-	  		  	httpPost.setEntity(new UrlEncodedFormEntity(params));
-	  	//	  	httpPost.setEntity(se);	
-	  		  	
-	            // 7. Set some headers to inform server about the type of the content   
-	       //     httpPost.setHeader("Accept", "application/json");
-	       //     httpPost.setHeader("Content-type", "application/json");
-	 
-	            // 8. Execute POST request to the given URL
-	            HttpResponse httpResponse = httpclient.execute(httpPost);
-	 
-	            // 9. receive response as inputStream
-	            InputStream inputStream = httpResponse.getEntity().getContent();
-	 
-	            
-				// 10. convert inputstream to string
-	            if(inputStream != null)
-	                result = convertInputStreamToString(inputStream);
-	            else
-	                result = "Did not work!";*/
 	 
 	        } catch (Exception e) {
 	            Log.d("InputStream", e.getLocalizedMessage());
