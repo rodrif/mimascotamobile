@@ -27,7 +27,7 @@ public final class R {
         public static final int small=0x7f020003;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080000;
+        public static final int LinearLayout1=0x7f080001;
         public static final int action_settings=0x7f08000e;
         public static final int bConectar=0x7f080009;
         public static final int bFormulario=0x7f08000d;
@@ -36,7 +36,7 @@ public final class R {
         public static final int bSubir=0x7f08000c;
         public static final int ePassword=0x7f080008;
         public static final int eUsuario=0x7f080007;
-        public static final int fragment1=0x7f080001;
+        public static final int fragment1=0x7f080000;
         public static final int tBreed=0x7f080005;
         public static final int tColor=0x7f080003;
         public static final int tDireccion=0x7f080004;
@@ -69,7 +69,7 @@ public final class R {
         public static final int Password=0x7f050004;
         public static final int Raza=0x7f050012;
         public static final int SacarFoto=0x7f050009;
-        public static final int SubirFoto=0x7f05000a;
+        public static final int Subir=0x7f05000a;
         public static final int Usuario=0x7f050003;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;

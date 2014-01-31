@@ -29,7 +29,7 @@
         android:id="@+id/bSubir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/SubirFoto" />
+        android:text="@string/Subir" />
 
     <Button
         android:id="@+id/bFormulario"

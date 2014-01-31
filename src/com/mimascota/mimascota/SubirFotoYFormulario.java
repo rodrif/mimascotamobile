@@ -43,6 +43,7 @@ public class SubirFotoYFormulario extends Fragment {
 	private Uri outputFileUri;
 
 	private static final int TAKE_PICTURE = 5;
+	private static final int LLENAR_FORMULARIO = 5;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,7 @@ public class SubirFotoYFormulario extends Fragment {
 
 		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
+		final Button buttonFormulario = (Button) view.findViewById(R.id.bFormulario);
 		
 		buttonSFoto.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -65,6 +67,13 @@ public class SubirFotoYFormulario extends Fragment {
 				onClickSubir(v);
 			}
 		});
+		
+		buttonFormulario.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onClickFormulario(v);
+			}
+
+		});
 
 		return view;
 	}
@@ -73,6 +82,12 @@ public class SubirFotoYFormulario extends Fragment {
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
 
+	}
+	
+	private void onClickFormulario(View v) {
+		// TODO Auto-generated method stub
+		Intent intent2 = new Intent(super.getActivity(), FormularioActivity.class);	
+		startActivityForResult(intent2, LLENAR_FORMULARIO);
 	}
 
 	public void onClickSacarFoto(View Boton) {
@@ -177,6 +192,9 @@ public class SubirFotoYFormulario extends Fragment {
 				imageView.setImageBitmap(bitmap);
 				Log.d("MiMascota", "imagen entera cargada");
 			}
+		}
+		if (requestCode == LLENAR_FORMULARIO) {
+			//TODO
 		}
 	}
 
