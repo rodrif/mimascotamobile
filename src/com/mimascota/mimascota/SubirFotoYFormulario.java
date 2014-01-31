@@ -195,6 +195,8 @@ public class SubirFotoYFormulario extends Fragment {
 		}
 		if (requestCode == LLENAR_FORMULARIO) {
 			//TODO
+			String jsonString = data.getExtras().getString("json");
+			Log.d("MiMascota", jsonString );
 		}
 	}
 
