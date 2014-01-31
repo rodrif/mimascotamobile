@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mi Mascota</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Password">Password</string>
+    <string name="Conectar">Conectar</string>
+    <string name="title_activity_main">Mi Mascota</string>
+    <string name="title_activity_subir_foto">Subir Foto</string>
+    <string name="FotoSubidaCorrectamente">Foto Subida Correctamente</string>
+    <string name="SacarFoto">Sacar Foto</string>
+    <string name="SubirFoto">Subir Foto</string>
+    <string name="FotoASubir">Foto a subir</string>
+    <string name="LlenarFormulario">Llenar Formulario</string>
+    <string name="title_activity_formulario">Formulario</string>    
+
+</resources>
