@@ -116,7 +116,6 @@ public class SubirFotoYFormulario extends Fragment {
 	            if(this.datosPerro == null) {
 	            	//harcodeo si no se lleno el formulario
 	            	jsonObject = new JSONObject();
-	            	//            jsonObject.accumulate("id", "2");
 		            jsonObject.put("age", "20");
 		            jsonObject.put("breed", "agagaegfag");
 		            jsonObject.put("user_id", "1");
