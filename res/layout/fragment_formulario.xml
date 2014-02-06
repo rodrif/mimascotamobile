@@ -28,11 +28,11 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tDireccion"
+        android:id="@+id/tDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:ems="10"
-        android:hint="@string/Direccion" />
+        android:ems="10"
+        android:hint="@string/Descripcion" />
 
     <EditText
         android:id="@+id/tBreed"

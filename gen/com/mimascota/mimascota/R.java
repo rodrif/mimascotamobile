@@ -39,7 +39,7 @@ public final class R {
         public static final int fragment1=0x7f080000;
         public static final int tBreed=0x7f080005;
         public static final int tColor=0x7f080003;
-        public static final int tDireccion=0x7f080004;
+        public static final int tDescripcion=0x7f080004;
         public static final int tNombre=0x7f080002;
         public static final int vFoto=0x7f08000a;
     }
@@ -60,6 +60,7 @@ public final class R {
     public static final class string {
         public static final int Color=0x7f050011;
         public static final int Conectar=0x7f050005;
+        public static final int Descripcion=0x7f050013;
         public static final int Direccion=0x7f050010;
         public static final int FotoASubir=0x7f05000b;
         public static final int FotoSubidaCorrectamente=0x7f050008;

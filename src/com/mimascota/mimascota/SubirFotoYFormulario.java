@@ -22,8 +22,10 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,10 +42,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class SubirFotoYFormulario extends Fragment {
+	private JSONObject datosPerro;
 	private Uri outputFileUri;
 
 	private static final int TAKE_PICTURE = 5;
-	private static final int LLENAR_FORMULARIO = 5;
+	private static final int LLENAR_FORMULARIO = 6;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,13 +88,11 @@ public class SubirFotoYFormulario extends Fragment {
 	}
 	
 	private void onClickFormulario(View v) {
-		// TODO Auto-generated method stub
 		Intent intent2 = new Intent(super.getActivity(), FormularioActivity.class);	
 		startActivityForResult(intent2, LLENAR_FORMULARIO);
 	}
 
 	public void onClickSacarFoto(View Boton) {
-		// FIXME
 		// Create an output file.
 		File file = new File(Environment.getExternalStorageDirectory(),
 				"test.jpg");
@@ -107,29 +108,36 @@ public class SubirFotoYFormulario extends Fragment {
 
 	public void onClickSubir(View Boton) {
 		Log.d("InputStream", "onClick");
-		String result = "";
+		String jsonString = "";
     	File ruta_sd = Environment.getExternalStorageDirectory();
-        String miFoto = ruta_sd.getAbsolutePath()+"/i.jpeg";
+        String miFoto = ruta_sd.getAbsolutePath()+"/test.jpg";
 		  try {
-	            JSONObject jsonObject = new JSONObject();
-	//            jsonObject.accumulate("id", "2");
-	            jsonObject.accumulate("age", "20");
-	            jsonObject.accumulate("breed", "agagaegfag");
-	            jsonObject.accumulate("user_id", "1");
-	            jsonObject.accumulate("color", "agagaegfag");
-	            jsonObject.accumulate("description", "agagaegfag");
-	            jsonObject.accumulate("name", "Juan2");
-	            jsonObject.accumulate("latitude", "10.4198");
-	            jsonObject.accumulate("longitude", "10.3012");
-	            jsonObject.accumulate("gmaps", "true");
-	            String jsonString = jsonObject.toString();
+	            JSONObject jsonObject;	            
+	            if(this.datosPerro == null) {
+	            	//harcodeo si no se lleno el formulario
+	            	jsonObject = new JSONObject();
+	            	//            jsonObject.accumulate("id", "2");
+		            jsonObject.put("age", "20");
+		            jsonObject.put("breed", "agagaegfag");
+		            jsonObject.put("user_id", "1");
+		            jsonObject.put("color", "agagaegfag");
+		            jsonObject.put("description", "agagaegfag");
+		            jsonObject.put("name", "Juan2");
+		            jsonObject.put("latitude", "10.4198");
+		            jsonObject.put("longitude", "10.3012");
+		            jsonObject.put("gmaps", "true");
+		            jsonString = jsonObject.toString();
+	            }else{
+	            	jsonString = datosPerro.toString();
+	            }
+
+	            
 	            Log.d("InputStream", "String" + jsonString);
 			  
 	            // 1. create HttpClient
               HttpClient httpclient = new DefaultHttpClient();
               httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-              HttpPost httppost = new HttpPost("http://192.168.1.36:3000/cargador/subirPerroEncontrado");
-        //     HttpPost httppost = new HttpPost("http://192.168.1.40/subir2");
+              HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER + ":3000/cargador/subirPerroEncontrado");
               File file = new File(miFoto);
               MultipartEntity mpEntity = new MultipartEntity();
               ContentBody foto = new FileBody(file, "image/jpeg");
@@ -140,9 +148,8 @@ public class SubirFotoYFormulario extends Fragment {
 	 
 	        } catch (Exception e) {
 	            Log.d("InputStream", e.getLocalizedMessage());
-	        }
-		  	
-		  	Log.d("InputStream", "Recibio:" + result);
+	        } 	
+
 	}
 	
     private static String convertInputStreamToString(InputStream inputStream) throws IOException{
@@ -159,15 +166,16 @@ public class SubirFotoYFormulario extends Fragment {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == TAKE_PICTURE) {
+		if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
 			ImageView imageView = (ImageView) getView()
 					.findViewById(R.id.vFoto);
 			// Check if the result includes a thumbnail Bitmap
 			if (data != null) {
-				if (data.hasExtra("data")) {
+	/*			if (data.hasExtra("data")) {
 					Bitmap thumbnail = data.getParcelableExtra("data");
 					imageView.setImageBitmap(thumbnail);
-				}
+				}*/
+				Log.d("MiMascota", "data distinto null");
 			} else {
 				// If there is no thumbnail image data, the image
 				// will have been stored in the target output URI.
@@ -193,9 +201,19 @@ public class SubirFotoYFormulario extends Fragment {
 				Log.d("MiMascota", "imagen entera cargada");
 			}
 		}
-		if (requestCode == LLENAR_FORMULARIO) {
-			//TODO
+		if (requestCode == LLENAR_FORMULARIO && resultCode == Activity.RESULT_OK) {
 			String jsonString = data.getExtras().getString("json");
+			try {
+					this.datosPerro = new JSONObject(jsonString);
+					//FIXME harcodeo un par de datos que no estan en el formulario
+					this.datosPerro.put("age", "20");
+					this.datosPerro.put("user_id", "1");
+					this.datosPerro.put("latitude", "10.41");
+					this.datosPerro.put("longitude", "10.31");
+					this.datosPerro.put("gmaps", "true");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}				
 			Log.d("MiMascota", jsonString );
 		}
 	}

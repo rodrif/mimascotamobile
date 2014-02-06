@@ -19,6 +19,7 @@
     <string name="Nombre">Nombre</string>
     <string name="Direccion">Direccion</string>
     <string name="Color">Color</string>
-    <string name="Raza">Raza</string>    
+    <string name="Raza">Raza</string>
+    <string name="Descripcion">Descripcion</string>    
 
 </resources>
