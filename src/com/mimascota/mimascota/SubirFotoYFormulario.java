@@ -47,7 +47,7 @@ public class SubirFotoYFormulario extends Fragment {
 
 	private static final int TAKE_PICTURE = 5;
 	private static final int LLENAR_FORMULARIO = 6;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

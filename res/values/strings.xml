@@ -21,7 +21,7 @@
     <string name="Color">Color</string>
     <string name="Raza">Raza</string>
     <string name="Descripcion">Descripcion</string>
-    <string name="Contraseña">Contraseña</string>
+    <string name="Contrasenia">Contraseña</string>
     <string name="Email">Email</string>    
 
 </resources>

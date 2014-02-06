@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.mimascota.mimascota.SubirFotoYFormulario"
+        android:name="com.mimascota.mimascota.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
