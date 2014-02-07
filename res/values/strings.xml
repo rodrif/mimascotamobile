@@ -22,6 +22,7 @@
     <string name="Raza">Raza</string>
     <string name="Descripcion">Descripcion</string>
     <string name="Contrasenia">Contraseña</string>
-    <string name="Email">Email</string>    
+    <string name="Email">Email</string>
+    <string name="title_activity_blank_fragment">BlankFragment</string>
 
 </resources>

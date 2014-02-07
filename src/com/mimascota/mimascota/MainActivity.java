@@ -28,7 +28,17 @@ public class MainActivity extends FragmentActivity implements LoginFragment.Inte
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
+		LoginFragment nuevoFragment = new LoginFragment();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+		 // Reemplazar en fragment_container cualquier Fragment con este
+
+		 transaction.replace(R.id.fragment1, nuevoFragment);
+//		 transaction.addToBackStack(null);
+
+		 // Realizar la transacción
+		 transaction.commit();	
 		
 	}
 

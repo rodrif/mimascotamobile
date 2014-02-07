@@ -38,6 +38,10 @@
             android:name="com.mimascota.mimascota.FormularioActivity"
             android:label="@string/title_activity_formulario" >
         </activity>
+        <activity
+            android:name="com.mimascota.mimascota.BlankFragment"
+            android:label="@string/title_activity_blank_fragment" >
+        </activity>
     </application>
 
 </manifest>
