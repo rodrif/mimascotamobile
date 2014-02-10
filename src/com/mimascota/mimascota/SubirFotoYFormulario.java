@@ -143,7 +143,7 @@ public class SubirFotoYFormulario extends Fragment {
 	            // 1. create HttpClient
               HttpClient httpclient = new DefaultHttpClient();
               httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-              HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER + ":3000/cargador/subirPerroEncontrado");
+              HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER + ":3000/cargador/subirPerroBuscado");
               File file = new File(miFoto);
               MultipartEntity mpEntity = new MultipartEntity();
               ContentBody foto = new FileBody(file, "image/jpeg");
