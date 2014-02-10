@@ -124,7 +124,7 @@ public class SubirFotoYFormulario extends Fragment {
 	            	jsonObject = new JSONObject();
 		            jsonObject.put("age", "20");
 		            jsonObject.put("breed", "agagaegfag");
-		            jsonObject.put("user_id", "2");
+		            jsonObject.put("user_id", this.userId);
 		            jsonObject.put("color", "agagaegfag");
 		            jsonObject.put("description", "agagaegfag");
 		            jsonObject.put("name", "Juan2");
