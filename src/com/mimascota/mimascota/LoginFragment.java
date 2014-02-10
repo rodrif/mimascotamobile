@@ -1,6 +1,8 @@
 package com.mimascota.mimascota;
 
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -8,11 +10,13 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ public class LoginFragment extends Fragment {
 	private String json = "";
 	private EditText eMail;
 	private EditText ePassword;
+	private int userId= -1;
 	
 	InterfaceLogin mCallback;
     // La Activity contenedora, debe implementar la interface
@@ -82,17 +87,26 @@ public class LoginFragment extends Fragment {
 			httpclient.getParams().setParameter(
 					CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 			HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER
-					+ ":3000/cargador/subirPerroEncontrado");
+					+ ":3000/observador/loginCelular");
 			MultipartEntity mpEntity = new MultipartEntity();
 			mpEntity.addPart("jsonString", new StringBody(json));
+			
 			httppost.setEntity(mpEntity);
-			httpclient.execute(httppost);
+			
+			HttpResponse resp = httpclient.execute(httppost);
+			HttpEntity ent = resp.getEntity();/*y obtenemos una respuesta*/
+			String text = EntityUtils.toString(ent);
+			Log.d("MiMascota", "Respuesta login: " + text);
+			userId = Integer.parseInt(text);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		mCallback.Loguear(2); //FIXME Se tiene que ejecutar con la respuesta del server del user_id
+		if(userId > 0) //solo si el usuario es valido
+			mCallback.Loguear(userId);
+//		mCallback.Loguear(2);  //FIXME harcodeado
 
 	}
 }

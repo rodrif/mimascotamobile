@@ -7,8 +7,12 @@ import android.view.Menu;
 
 public class MainActivity extends FragmentActivity implements LoginFragment.InterfaceLogin {
 	
-	public void Loguear(int userId) {	
+	public void Loguear(int userId) {
+		//FIXME agregar datos de userId fragment
+		
         SubirFotoYFormulario nuevoFragment = new SubirFotoYFormulario();
+        
+        nuevoFragment.setUserId(userId);
     /*    Bundle args = new Bundle();
         args.putInt(SubirFotoYFormulario.ARG_POSITION, position);
         nuevoFragment.setArguments(args);*/

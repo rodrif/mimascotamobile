@@ -44,6 +44,11 @@ import android.widget.ImageView;
 public class SubirFotoYFormulario extends Fragment {
 	private JSONObject datosPerro;
 	private Uri outputFileUri;
+	private int userId = -1;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	private static final int TAKE_PICTURE = 5;
 	private static final int LLENAR_FORMULARIO = 6;
@@ -118,7 +123,7 @@ public class SubirFotoYFormulario extends Fragment {
 	            	jsonObject = new JSONObject();
 		            jsonObject.put("age", "20");
 		            jsonObject.put("breed", "agagaegfag");
-		            jsonObject.put("user_id", "1");
+		            jsonObject.put("user_id", "2");
 		            jsonObject.put("color", "agagaegfag");
 		            jsonObject.put("description", "agagaegfag");
 		            jsonObject.put("name", "Juan2");
@@ -127,6 +132,7 @@ public class SubirFotoYFormulario extends Fragment {
 		            jsonObject.put("gmaps", "true");
 		            jsonString = jsonObject.toString();
 	            }else{
+	            	datosPerro.put("user_id", this.userId);
 	            	jsonString = datosPerro.toString();
 	            }
 
@@ -169,11 +175,11 @@ public class SubirFotoYFormulario extends Fragment {
 			ImageView imageView = (ImageView) getView()
 					.findViewById(R.id.vFoto);
 			// Check if the result includes a thumbnail Bitmap
-			if (data != null) {
-	/*			if (data.hasExtra("data")) {
+			if (data != null) {	//no me acuerdo por que esta este if
+				if (data.hasExtra("data")) {
 					Bitmap thumbnail = data.getParcelableExtra("data");
 					imageView.setImageBitmap(thumbnail);
-				}*/
+				}
 				Log.d("MiMascota", "data distinto null");
 			} else {
 				// If there is no thumbnail image data, the image
@@ -206,7 +212,6 @@ public class SubirFotoYFormulario extends Fragment {
 					this.datosPerro = new JSONObject(jsonString);
 					//FIXME harcodeo un par de datos que no estan en el formulario
 					this.datosPerro.put("age", "20");
-					this.datosPerro.put("user_id", "1");
 					this.datosPerro.put("latitude", "10.41");
 					this.datosPerro.put("longitude", "10.31");
 					this.datosPerro.put("gmaps", "true");
