@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -150,6 +151,9 @@ public class SubirFotoYFormulario extends Fragment {
               mpEntity.addPart("jsonString", new StringBody(jsonString));
               httppost.setEntity(mpEntity);
               httpclient.execute(httppost);
+  			  AlertDialog.Builder cartel = new AlertDialog.Builder(this.getActivity());
+			  cartel.setMessage("Gracias por enviar!!!");
+			  cartel.show();
 	 
 	        } catch (Exception e) {
 	            Log.d("InputStream", e.getLocalizedMessage());

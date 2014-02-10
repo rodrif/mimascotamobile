@@ -14,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -104,8 +105,13 @@ public class LoginFragment extends Fragment {
 			e.printStackTrace();
 		}
 		
-		if(userId > 0) //solo si el usuario es valido
+		if(userId > 0) {//solo si el usuario es valido
 			mCallback.Loguear(userId);
+		}else{
+			AlertDialog.Builder cartel = new AlertDialog.Builder(this.getActivity());
+								cartel.setMessage("Usuario o Password incorrectos");
+								cartel.show();
+		}
 //		mCallback.Loguear(2);  //FIXME harcodeado
 
 	}
