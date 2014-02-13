@@ -53,6 +53,7 @@ public class SubirFotoYFormulario extends Fragment {
 
 	private static final int TAKE_PICTURE = 5;
 	private static final int LLENAR_FORMULARIO = 6;
+	private static final int LLENAR_UBICACION = 7;	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +65,14 @@ public class SubirFotoYFormulario extends Fragment {
 		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
 		final Button buttonFormulario = (Button) view.findViewById(R.id.bFormulario);
+		final Button buttonUbicacion = (Button) view.findViewById(R.id.bUbicacion);
+		
+		buttonUbicacion.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onClickUbicacion(v);
+			}
+
+		});
 		
 		buttonSFoto.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -91,6 +100,11 @@ public class SubirFotoYFormulario extends Fragment {
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
 
+	}
+	
+	private void onClickUbicacion(View v) {
+		Intent intent3 = new Intent(super.getActivity(), MapaActivity.class);	
+		startActivityForResult(intent3, LLENAR_UBICACION);
 	}
 	
 	private void onClickFormulario(View v) {

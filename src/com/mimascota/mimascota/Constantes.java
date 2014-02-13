@@ -2,5 +2,5 @@ package com.mimascota.mimascota;
 
 
 public class Constantes {
-	static String IPSERVER = "192.168.1.33";
+	static String IPSERVER = "192.168.1.34";
 }

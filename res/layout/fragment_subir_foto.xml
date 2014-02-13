@@ -37,4 +37,10 @@
         android:layout_height="wrap_content"
         android:text="@string/LlenarFormulario" />
 
+    <Button
+        android:id="@+id/bUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Ubicacion" />
+
 </LinearLayout>

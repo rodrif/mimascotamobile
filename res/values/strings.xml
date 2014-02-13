@@ -24,5 +24,8 @@
     <string name="Contrasenia">Contraseña</string>
     <string name="Email">Email</string>
     <string name="title_activity_blank_fragment">BlankFragment</string>
+    <string name="title_activity_mapa">MapaActivity</string>
+    <string name="title_activity_mapa_fragment">MapaFragment</string>
+    <string name="Ubicacion">Ubicacion</string>
 
 </resources>
