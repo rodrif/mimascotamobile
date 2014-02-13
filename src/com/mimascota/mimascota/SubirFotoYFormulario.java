@@ -203,8 +203,6 @@ public class SubirFotoYFormulario extends Fragment {
 				// If there is no thumbnail image data, the image
 				// will have been stored in the target output URI.
 				// Resize the full image to fit in out image view.
-				int width = imageView.getWidth();
-				int height = imageView.getHeight();
 				BitmapFactory.Options factoryOptions = new BitmapFactory.Options();
 				factoryOptions.inJustDecodeBounds = true;
 				BitmapFactory.decodeFile(outputFileUri.getPath(),
@@ -212,8 +210,8 @@ public class SubirFotoYFormulario extends Fragment {
 				int imageWidth = factoryOptions.outWidth;
 				int imageHeight = factoryOptions.outHeight;
 				// Determine how much to scale down the image
-				int scaleFactor = Math.min(imageWidth / width, imageHeight
-						/ height);
+				int scaleFactor = Math.min(imageWidth / Constantes.viewerWidth, imageHeight
+						/ Constantes.viewerHeight);
 				// Decode the image file into a Bitmap sized to fill the View
 				factoryOptions.inJustDecodeBounds = false;
 				factoryOptions.inSampleSize = scaleFactor;
