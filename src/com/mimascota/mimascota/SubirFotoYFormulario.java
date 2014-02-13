@@ -43,8 +43,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class SubirFotoYFormulario extends Fragment {
-	private JSONObject datosPerro;
-	private Uri outputFileUri;
+	private JSONObject datosPerro;	
 	private int userId = -1;
 
 	public void setUserId(int userId) {
@@ -60,6 +59,15 @@ public class SubirFotoYFormulario extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_subir_foto, container,
 				false);
+		
+		ImageView imageView = (ImageView) view.findViewById(R.id.vFoto);
+		if(imageView == null) {
+			Log.d("MiMascota", "image view onCreateView null");
+		}
+		else {
+			Log.d("MiMascota", "imageWith inicial onCreateView = " + String.valueOf(imageView.getWidth()));
+			Log.d("MiMascota", "imageHeight inicial onCreateView = " + String.valueOf(imageView.getHeight()));
+		}
 
 		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
@@ -84,13 +92,24 @@ public class SubirFotoYFormulario extends Fragment {
 
 		});
 
+		Log.d("MiMascota", "onCreateView Finalizado");
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
-
+		
+		ImageView imageView = (ImageView) getActivity().findViewById(R.id.vFoto);
+		if(imageView == null) {
+			Log.d("MiMascota", "image view null");
+		}
+		else {
+			Log.d("MiMascota", "imageWith inicial onActivityCreated = " + String.valueOf(imageView.getWidth()));
+			Log.d("MiMascota", "imageHeight inicial onActivityCreated = " + String.valueOf(imageView.getHeight()));
+		}
+		
+		Log.d("MiMascota", " activity created");
 	}
 	
 	private void onClickFormulario(View v) {
@@ -102,12 +121,24 @@ public class SubirFotoYFormulario extends Fragment {
 		// Create an output file.
 		File file = new File(Environment.getExternalStorageDirectory(),
 				"test.jpg");
-		outputFileUri = Uri.fromFile(file);
+		Uri outputFileUri = Uri.fromFile(file);
 		// Generate the Intent.
+		
+		ImageView imageView = (ImageView) getView()
+				.findViewById(R.id.vFoto);
+		if(imageView == null) {
+			Log.d("MiMascota", "image view null");
+		}
+		else {
+			Log.d("MiMascota", "imageWith onClickSacarFoto= " + String.valueOf(imageView.getWidth()));
+			Log.d("MiMascota", "imageHeight onClickSacarFoto= " + String.valueOf(imageView.getHeight()));
+		}
+		
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 		// Launch the camera app.
 		startActivityForResult(intent, TAKE_PICTURE);
+		Log.d("MiMascota", "camara lanzada");
 		// startActivityForResult(
 		// new Intent(MediaStore.ACTION_IMAGE_CAPTURE), TAKE_PICTURE);
 	}
@@ -178,6 +209,13 @@ public class SubirFotoYFormulario extends Fragment {
 		if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
 			ImageView imageView = (ImageView) getView()
 					.findViewById(R.id.vFoto);
+			if(imageView == null) {
+				Log.d("MiMascota", "image view null");
+			}
+			else {
+				Log.d("MiMascota", "imageWith inicial = " + String.valueOf(imageView.getWidth()));
+				Log.d("MiMascota", "imageHeight inicial = " + String.valueOf(imageView.getHeight()));
+			}
 			// Check if the result includes a thumbnail Bitmap
 			if (data != null) {	//no me acuerdo por que esta este if
 				if (data.hasExtra("data")) {
@@ -189,21 +227,32 @@ public class SubirFotoYFormulario extends Fragment {
 				// If there is no thumbnail image data, the image
 				// will have been stored in the target output URI.
 				// Resize the full image to fit in out image view.
+				File file = new File(Environment.getExternalStorageDirectory(),
+						"test.jpg");
+				Uri outputFileUri = Uri.fromFile(file);
 				int width = imageView.getWidth();
 				int height = imageView.getHeight();
 				BitmapFactory.Options factoryOptions = new BitmapFactory.Options();
 				factoryOptions.inJustDecodeBounds = true;
-				BitmapFactory.decodeFile(outputFileUri.getPath(),
+				Log.d("MiMascota", "creando primer bitmap");
+				Bitmap bm = BitmapFactory.decodeFile(outputFileUri.getPath(),
 						factoryOptions);
+				Log.d("MiMascota", "primer bitmap creado");
 				int imageWidth = factoryOptions.outWidth;
+				String aux = String.valueOf(imageWidth);
+				Log.d("MiMascota", "imageWith = " + aux);
 				int imageHeight = factoryOptions.outHeight;
 				// Determine how much to scale down the image
+				Log.d("MiMascota", "calculando scale factor...");
+				Log.d("MiMascota", "with = " + String.valueOf(width));
 				int scaleFactor = Math.min(imageWidth / width, imageHeight
 						/ height);
+				Log.d("MiMascota", "calculado scale factor");
 				// Decode the image file into a Bitmap sized to fill the View
 				factoryOptions.inJustDecodeBounds = false;
 				factoryOptions.inSampleSize = scaleFactor;
 				factoryOptions.inPurgeable = true;
+				Log.d("MiMascota", "imagen entera cargadandose");
 				Bitmap bitmap = BitmapFactory.decodeFile(
 						outputFileUri.getPath(), factoryOptions);
 				imageView.setImageBitmap(bitmap);

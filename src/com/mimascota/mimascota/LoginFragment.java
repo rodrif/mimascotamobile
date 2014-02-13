@@ -29,7 +29,7 @@ public class LoginFragment extends Fragment {
 	private String json = "";
 	private EditText eMail;
 	private EditText ePassword;
-	private int userId= -1;
+	private int userId= 1;
 	
 	InterfaceLogin mCallback;
     // La Activity contenedora, debe implementar la interface
@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+/*		
 		if(userId > 0) {//solo si el usuario es valido
 			mCallback.Loguear(userId);
 		}else{
@@ -112,7 +112,7 @@ public class LoginFragment extends Fragment {
 								cartel.setMessage("Usuario o Password incorrectos");
 								cartel.show();
 		}
-//		mCallback.Loguear(2);  //FIXME harcodeado
+*/		mCallback.Loguear(1);  //FIXME harcodeado
 
 	}
 }
