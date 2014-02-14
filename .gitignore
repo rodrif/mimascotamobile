@@ -3,3 +3,6 @@ bin/**
 **/bin/*
 **/bin/**
 .settings/*
+project.properties
+gen/*
+gen/**

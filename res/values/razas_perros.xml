@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      <string-array name="valores_razas">
+        <item>Raza1</item>
+        <item>Raza2</item>
+        <item>Raza3</item>
+        <item>Raza4</item>
+        <item>Raza5</item>
+    </string-array>    
+</resources>
