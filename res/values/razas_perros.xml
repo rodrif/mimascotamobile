@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      <string-array name="valores_razas">
+        <item>Mestizo</item>
+        <item>Affenpinscher</item>
+        <item>Airedale terrier</item>
+        <item>American Hairless terrier</item>
+        <item>Perro majorero</item>
+        <item>Beagle</item>
+        <item>Border collie</item>
+        <item>Boston terrier</item>
+        <item>Boxer</item>
+        <item>Bull Terrier</item>
+        <item>Bulldog americano</item>
+        <item>Bulldog frances</item>
+        <item>Bulldog ingles</item>
+        <item>Caniche</item>
+        <item>Chow chow</item>
+        <item>Collie</item>
+        <item>Dalmata</item>
+        <item>Dobermann</item>
+        <item>Dogo argentino</item>
+        <item>Dogo de burdeos</item>
+        <item>Fox Terrier</item>
+        <item>Galgo español</item>
+        <item>Galgo hungaro</item>
+        <item>Golden retriever</item>
+        <item>Gran danes</item>
+        <item>Greyhound</item>
+        <item>Husky siberiano</item>
+        <item>Labrador retriever</item>
+        <item>Maltés</item>
+        <item>Manchester terrier</item>
+        <item>Pastor alemán</item>
+        <item>Pastor belga</item>
+        <item>Pastor vasco</item>
+        <item>Pekinés</item>
+        <item>Perro de agua americano</item>
+        <item>Perro esquimal canadiense</item>
+        <item>Pinscher miniatura</item>
+        <item>Pitbull</item>
+        <item>Podenco canario</item>
+        <item>Pointer</item>
+        <item>Ratonero valenciano</item>
+        <item>Rottweiler</item>
+        <item>San Bernardo</item>
+        <item>Setter inglés</item>
+        <item>Setter irlandés</item>
+        <item>Shar Pei</item>
+        <item>Shiba Inu</item>
+        <item>Skye terrier</item>
+        <item>Terranova</item>
+        <item>Terrier alemán</item>
+        <item>Terrier australiano</item>
+        <item>Weimaraner</item>
+        <item>Yorkshire terrier</item>     
+    </string-array>    
+</resources>

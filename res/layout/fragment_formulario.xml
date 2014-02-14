@@ -34,7 +34,7 @@
         android:ems="10"
         android:hint="@string/Descripcion" />
 
-    <EditText
+    <Spinner
         android:id="@+id/tBreed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
