@@ -6,3 +6,4 @@ bin/**
 project.properties
 gen/*
 gen/**
+gen/*/*/*
