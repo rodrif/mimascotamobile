@@ -8,6 +8,9 @@
 package com.mimascota.mimascota;
 
 public final class R {
+    public static final class array {
+        public static final int valores_razas=0x7f090000;
+    }
     public static final class attr {
         /** 
     The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
@@ -262,13 +265,13 @@ containing a value of this type.
         public static final int fragment_subir_foto=0x7f030007;
     }
     public static final class menu {
-        public static final int blank=0x7f0a0000;
-        public static final int formulario=0x7f0a0001;
-        public static final int forrmularo=0x7f0a0002;
-        public static final int login=0x7f0a0003;
-        public static final int main=0x7f0a0004;
-        public static final int mapa=0x7f0a0005;
-        public static final int subir_foto=0x7f0a0006;
+        public static final int blank=0x7f0b0000;
+        public static final int formulario=0x7f0b0001;
+        public static final int forrmularo=0x7f0b0002;
+        public static final int login=0x7f0b0003;
+        public static final int main=0x7f0b0004;
+        public static final int mapa=0x7f0b0005;
+        public static final int subir_foto=0x7f0b0006;
     }
     public static final class string {
         public static final int Color=0x7f06002b;
@@ -415,11 +418,11 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
+        public static final int AppTheme=0x7f0a0001;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.
