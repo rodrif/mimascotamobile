@@ -27,5 +27,6 @@
     <string name="title_activity_mapa">MapaActivity</string>
     <string name="title_activity_mapa_fragment">MapaFragment</string>
     <string name="Ubicacion">Ubicacion</string>
+    <string name="action_confirmar">Confirmar ubicacion</string>
 
 </resources>

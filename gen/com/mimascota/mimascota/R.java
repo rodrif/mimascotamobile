@@ -225,6 +225,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050006;
+        public static final int action_confirmar=0x7f050016;
         public static final int action_settings=0x7f050015;
         public static final int bConectar=0x7f05000f;
         public static final int bFormulario=0x7f050013;
@@ -287,6 +288,7 @@ containing a value of this type.
         public static final int Subir=0x7f060024;
         public static final int Ubicacion=0x7f060033;
         public static final int Usuario=0x7f06001d;
+        public static final int action_confirmar=0x7f060034;
         public static final int action_settings=0x7f06001b;
         public static final int app_name=0x7f06001a;
         /**   Title for notification shown when GooglePlayServices needs to be

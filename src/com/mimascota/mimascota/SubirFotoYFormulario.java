@@ -5,22 +5,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class SubirFotoYFormulario extends Fragment {
 	private JSONObject datosPerro;
@@ -53,8 +48,8 @@ public class SubirFotoYFormulario extends Fragment {
 
 	private static final int TAKE_PICTURE = 5;
 	private static final int LLENAR_FORMULARIO = 6;
-	private static final int LLENAR_UBICACION = 7;	
-	
+	private static final int LLENAR_UBICACION = 7;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -64,28 +59,30 @@ public class SubirFotoYFormulario extends Fragment {
 
 		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
-		final Button buttonFormulario = (Button) view.findViewById(R.id.bFormulario);
-		final Button buttonUbicacion = (Button) view.findViewById(R.id.bUbicacion);
-		
+		final Button buttonFormulario = (Button) view
+				.findViewById(R.id.bFormulario);
+		final Button buttonUbicacion = (Button) view
+				.findViewById(R.id.bUbicacion);
+
 		buttonUbicacion.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onClickUbicacion(v);
 			}
 
 		});
-		
+
 		buttonSFoto.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onClickSacarFoto(v);
 			}
 		});
-		
+
 		buttonSubir.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onClickSubir(v);
 			}
 		});
-		
+
 		buttonFormulario.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onClickFormulario(v);
@@ -101,14 +98,15 @@ public class SubirFotoYFormulario extends Fragment {
 		super.onActivityCreated(state);
 
 	}
-	
+
 	private void onClickUbicacion(View v) {
-		Intent intent3 = new Intent(super.getActivity(), MapaActivity.class);	
+		Intent intent3 = new Intent(super.getActivity(), MapaActivity.class);
 		startActivityForResult(intent3, LLENAR_UBICACION);
 	}
-	
+
 	private void onClickFormulario(View v) {
-		Intent intent2 = new Intent(super.getActivity(), FormularioActivity.class);	
+		Intent intent2 = new Intent(super.getActivity(),
+				FormularioActivity.class);
 		startActivityForResult(intent2, LLENAR_FORMULARIO);
 	}
 
@@ -129,63 +127,67 @@ public class SubirFotoYFormulario extends Fragment {
 	public void onClickSubir(View Boton) {
 		Log.d("InputStream", "onClick");
 		String jsonString = "";
-    	File ruta_sd = Environment.getExternalStorageDirectory();
-        String miFoto = ruta_sd.getAbsolutePath()+"/test.jpg";
-		  try {
-	            JSONObject jsonObject;	            
-	            if(this.datosPerro == null) {
-	            	//harcodeo si no se lleno el formulario
-	            	jsonObject = new JSONObject();
-		            jsonObject.put("age", "20");
-		            jsonObject.put("breed", "agagaegfag");
-		            jsonObject.put("user_id", this.userId);
-		            jsonObject.put("color", "agagaegfag");
-		            jsonObject.put("description", "agagaegfag");
-		            jsonObject.put("name", "Juan2");
-		            jsonObject.put("latitude", "10.4198");
-		            jsonObject.put("longitude", "10.3012");
-		            jsonObject.put("gmaps", "true");
-		            jsonString = jsonObject.toString();
-	            }else{
-	            	datosPerro.put("user_id", this.userId);
-	            	jsonString = datosPerro.toString();
-	            }
+		File ruta_sd = Environment.getExternalStorageDirectory();
+		String miFoto = ruta_sd.getAbsolutePath() + "/test.jpg";
+		try {
+			JSONObject jsonObject;
+			if (this.datosPerro == null) {
+				// harcodeo si no se lleno el formulario
+				jsonObject = new JSONObject();
+				jsonObject.put("age", "20");
+				jsonObject.put("breed", "agagaegfag");
+				jsonObject.put("user_id", this.userId);
+				jsonObject.put("color", "agagaegfag");
+				jsonObject.put("description", "agagaegfag");
+				jsonObject.put("name", "Juan2");
+				jsonObject.put("latitude", "10.4198");
+				jsonObject.put("longitude", "10.3012");
+				jsonObject.put("gmaps", "true");
+				jsonString = jsonObject.toString();
+			} else {
+				datosPerro.put("user_id", this.userId);
+				jsonString = datosPerro.toString();
+			}
 
-	            
-	            Log.d("InputStream", "String" + jsonString);
-			  
-	            // 1. create HttpClient
-              HttpClient httpclient = new DefaultHttpClient();
-              httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-              HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER + ":3000/cargador/subirPerroBuscado");
-              File file = new File(miFoto);
-              MultipartEntity mpEntity = new MultipartEntity();
-              ContentBody foto = new FileBody(file, "image/jpeg");
-              mpEntity.addPart("fotoUp", foto);
-              mpEntity.addPart("jsonString", new StringBody(jsonString));
-              httppost.setEntity(mpEntity);
-              httpclient.execute(httppost);
-  			  AlertDialog.Builder cartel = new AlertDialog.Builder(this.getActivity());
-			  cartel.setMessage("Gracias por enviar!!!");
-			  cartel.show();
-	 
-	        } catch (Exception e) {
-	            Log.d("InputStream", e.getLocalizedMessage());
-	        } 	
+			Log.d("InputStream", "String" + jsonString);
+
+			// 1. create HttpClient
+			HttpClient httpclient = new DefaultHttpClient();
+			httpclient.getParams().setParameter(
+					CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+			HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER
+					+ ":3000/cargador/subirPerroBuscado");
+			File file = new File(miFoto);
+			MultipartEntity mpEntity = new MultipartEntity();
+			ContentBody foto = new FileBody(file, "image/jpeg");
+			mpEntity.addPart("fotoUp", foto);
+			mpEntity.addPart("jsonString", new StringBody(jsonString));
+			httppost.setEntity(mpEntity);
+			httpclient.execute(httppost);
+			AlertDialog.Builder cartel = new AlertDialog.Builder(
+					this.getActivity());
+			cartel.setMessage("Gracias por enviar!!!");
+			cartel.show();
+
+		} catch (Exception e) {
+			Log.d("InputStream", e.getLocalizedMessage());
+		}
 
 	}
-	
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
- 
-        inputStream.close();
-        return result;
- 
-    } 
+
+	private static String convertInputStreamToString(InputStream inputStream)
+			throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(inputStream));
+		String line = "";
+		String result = "";
+		while ((line = bufferedReader.readLine()) != null)
+			result += line;
+
+		inputStream.close();
+		return result;
+
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -193,7 +195,7 @@ public class SubirFotoYFormulario extends Fragment {
 			ImageView imageView = (ImageView) getView()
 					.findViewById(R.id.vFoto);
 			// Check if the result includes a thumbnail Bitmap
-			if (data != null) {	//no me acuerdo por que esta este if
+			if (data != null) { // no me acuerdo por que esta este if
 				if (data.hasExtra("data")) {
 					Bitmap thumbnail = data.getParcelableExtra("data");
 					imageView.setImageBitmap(thumbnail);
@@ -224,19 +226,49 @@ public class SubirFotoYFormulario extends Fragment {
 				Log.d("MiMascota", "imagen entera cargada");
 			}
 		}
-		if (requestCode == LLENAR_FORMULARIO && resultCode == Activity.RESULT_OK) {
-			String jsonString = data.getExtras().getString("json");
+		if (requestCode == LLENAR_FORMULARIO
+				&& resultCode == Activity.RESULT_OK) {
 			try {
-					this.datosPerro = new JSONObject(jsonString);
-					//FIXME harcodeo un par de datos que no estan en el formulario
-					this.datosPerro.put("age", "20");
-					this.datosPerro.put("latitude", "10.41");
-					this.datosPerro.put("longitude", "10.31");
-					this.datosPerro.put("gmaps", "true");
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}				
-			Log.d("MiMascota", jsonString );
+				if (this.datosPerro == null) {
+					this.datosPerro = new JSONObject();
+				}
+
+				String jsonString = data.getExtras().getString("json");
+				JSONObject jsonAux = new JSONObject(jsonString);
+				Iterator<String> it = jsonAux.keys();
+
+				while (it.hasNext()) {
+					String clave = it.next();
+					this.datosPerro.put(clave, jsonAux.get(clave));
+				}
+
+				// FIXME harcodeo un par de datos que no estan en el formulario
+				this.datosPerro.put("age", "20");
+				this.datosPerro.put("gmaps", "true");
+
+				Log.d("MiMascota", jsonString);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		if (requestCode == LLENAR_UBICACION && resultCode == Activity.RESULT_OK) {
+			double latitude = data.getExtras().getDouble("lat");
+			double longitude = data.getExtras().getDouble("lng");
+
+			if (this.datosPerro == null) {
+				this.datosPerro = new JSONObject();
+			}
+
+			try {
+				this.datosPerro.put("latitude", latitude);
+				this.datosPerro.put("longitude", longitude);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			Toast.makeText(this.getActivity(),
+					"Lat: " + latitude + "\n" + "Lng: " + longitude + "\n",
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 
