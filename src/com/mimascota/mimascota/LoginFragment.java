@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment {
 	private void onClickConectar(View v) {
 		String sMail = eMail.getText().toString();
 		String sPassword = ePassword.getText().toString();
-
+/*
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put("email", sMail);
@@ -95,7 +95,7 @@ public class LoginFragment extends Fragment {
 			httppost.setEntity(mpEntity);
 			
 			HttpResponse resp = httpclient.execute(httppost);
-			HttpEntity ent = resp.getEntity();/*y obtenemos una respuesta*/
+			HttpEntity ent = resp.getEntity();//y obtenemos una respuesta
 			String text = EntityUtils.toString(ent);
 			Log.d("MiMascota", "Respuesta login: " + text);
 			userId = Integer.parseInt(text);
@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+*/		
 /*		if(userId > 0) {//solo si el usuario es valido
 			mCallback.Loguear(userId);
 		}else{
@@ -112,7 +112,7 @@ public class LoginFragment extends Fragment {
 								cartel.setMessage("Usuario o Password incorrectos");
 								cartel.show();
 		}*/
-		mCallback.Loguear(2);  //FIXME harcodeado
+		mCallback.Loguear(1);  //FIXME harcodeado
 
 	}
 }
