@@ -67,10 +67,11 @@ public class MainActivity extends FragmentActivity implements LoginFragment.Inte
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.d("MiMascota", Integer.toString(item.getItemId()));
+//		Log.d("MiMascota", Integer.toString(item.getItemId()));
 		if(item.getItemId() > 0) {
 			Constantes.setIpServer("192.168.1." +Integer.toString(item.getItemId()));
 		}
+		Log.d("MiMascota", "IpServer es: " + Constantes.IPSERVER);
 		
 	    return true;
 	}

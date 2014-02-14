@@ -149,7 +149,7 @@ public class SubirFotoYFormulario extends Fragment {
 				jsonString = datosPerro.toString();
 			}
 
-			Log.d("InputStream", "String" + jsonString);
+			Log.d("InputStream", "StringOnClickSubir" + jsonString);
 
 			// 1. create HttpClient
 			HttpClient httpclient = new DefaultHttpClient();
