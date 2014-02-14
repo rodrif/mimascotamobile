@@ -7,12 +7,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements LoginFragment.InterfaceLogin {
 	
 	public void Loguear(int userId) {
-		//FIXME agregar datos de userId fragment
-		
         SubirFotoYFormulario nuevoFragment = new SubirFotoYFormulario();
         
         nuevoFragment.setUserId(userId);
@@ -61,6 +60,9 @@ public class MainActivity extends FragmentActivity implements LoginFragment.Inte
 		for(int i = 2 ; i <=200 ; i++) {
 			smnu.add(Menu.NONE, i, Menu.NONE, "192.168.1." + Integer.toString(i));
 		}
+		
+		menu.add(Menu.NONE, -1, Menu.NONE, "Saltar Login");
+		menu.add(Menu.NONE, -2, Menu.NONE, "Saltar Protecciones");
 			
 		return true;
 	}
@@ -68,6 +70,18 @@ public class MainActivity extends FragmentActivity implements LoginFragment.Inte
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 //		Log.d("MiMascota", Integer.toString(item.getItemId()));
+		if(item.getItemId() == -1) {
+			Constantes.saltearLogin = true;
+			Toast.makeText(this,
+					"Login Harcodeado", Toast.LENGTH_SHORT)
+					.show();
+		}
+		if(item.getItemId() == -2) {
+			Constantes.debug = true;
+			Toast.makeText(this,
+					"Protecciones desactivadas", Toast.LENGTH_SHORT)
+					.show();	
+		}
 		if(item.getItemId() > 0) {
 			Constantes.setIpServer("192.168.1." +Integer.toString(item.getItemId()));
 		}
