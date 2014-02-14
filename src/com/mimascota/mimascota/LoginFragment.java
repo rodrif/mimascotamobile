@@ -78,41 +78,44 @@ public class LoginFragment extends Fragment {
 		String sPassword = ePassword.getText().toString();
 
 		JSONObject jsonObject = new JSONObject();
-	/*	try {
-			jsonObject.put("email", sMail);
-			jsonObject.put("password", sPassword);
+		if (!Constantes.saltearLogin) {
+			try {
+				jsonObject.put("email", sMail);
+				jsonObject.put("password", sPassword);
 
-			json = jsonObject.toString();
+				json = jsonObject.toString();
 
-			// 1. create HttpClient
-			HttpClient httpclient = new DefaultHttpClient();
-			httpclient.getParams().setParameter(
-					CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-			HttpPost httppost = new HttpPost("http://" + Constantes.IPSERVER
-					+ ":3000/observador/loginCelular");
-			MultipartEntity mpEntity = new MultipartEntity();
-			mpEntity.addPart("jsonString", new StringBody(json));
-			
-			httppost.setEntity(mpEntity);
-			
-			HttpResponse resp = httpclient.execute(httppost);
-			HttpEntity ent = resp.getEntity();//y obtenemos una respuesta
-			String text = EntityUtils.toString(ent);
-			Log.d("MiMascota", "Respuesta login: " + text);
-			userId = Integer.parseInt(text);
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+				// 1. create HttpClient
+				HttpClient httpclient = new DefaultHttpClient();
+				httpclient.getParams().setParameter(
+						CoreProtocolPNames.PROTOCOL_VERSION,
+						HttpVersion.HTTP_1_1);
+				HttpPost httppost = new HttpPost("http://"
+						+ Constantes.IPSERVER + ":3000/observador/loginCelular");
+				MultipartEntity mpEntity = new MultipartEntity();
+				mpEntity.addPart("jsonString", new StringBody(json));
+
+				httppost.setEntity(mpEntity);
+
+				HttpResponse resp = httpclient.execute(httppost);
+				HttpEntity ent = resp.getEntity();// y obtenemos una respuesta
+				String text = EntityUtils.toString(ent);
+				Log.d("MiMascota", "Respuesta login: " + text);
+				userId = Integer.parseInt(text);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (userId > 0) {// solo si el usuario es valido
+				mCallback.Loguear(userId);
+			} else {
+				Toast.makeText(this.getActivity(),
+						"Usuario o Password incorrectos", Toast.LENGTH_SHORT)
+						.show();
+			}
+		} else {
+			mCallback.Loguear(2);
 		}
-		
-		if(userId > 0) {//solo si el usuario es valido
-			mCallback.Loguear(userId);
-		}else{
-			Toast.makeText(this.getActivity(),
-							"Usuario o Password incorrectos", Toast.LENGTH_SHORT).show();								
-		}*/
-		mCallback.Loguear(2);  //FIXME harcodeado
-
 	}
 }
