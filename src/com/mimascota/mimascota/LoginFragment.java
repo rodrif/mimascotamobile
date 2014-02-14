@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class LoginFragment extends Fragment {
@@ -77,7 +78,7 @@ public class LoginFragment extends Fragment {
 		String sPassword = ePassword.getText().toString();
 
 		JSONObject jsonObject = new JSONObject();
-		try {
+	/*	try {
 			jsonObject.put("email", sMail);
 			jsonObject.put("password", sPassword);
 
@@ -108,11 +109,10 @@ public class LoginFragment extends Fragment {
 		if(userId > 0) {//solo si el usuario es valido
 			mCallback.Loguear(userId);
 		}else{
-			AlertDialog.Builder cartel = new AlertDialog.Builder(this.getActivity());
-								cartel.setMessage("Usuario o Password incorrectos");
-								cartel.show();
-		}
-//		mCallback.Loguear(2);  //FIXME harcodeado
+			Toast.makeText(this.getActivity(),
+							"Usuario o Password incorrectos", Toast.LENGTH_SHORT).show();								
+		}*/
+		mCallback.Loguear(2);  //FIXME harcodeado
 
 	}
 }

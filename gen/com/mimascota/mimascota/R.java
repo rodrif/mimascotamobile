@@ -228,11 +228,11 @@ containing a value of this type.
         public static final int action_confirmar=0x7f050016;
         public static final int action_settings=0x7f050015;
         public static final int bConectar=0x7f05000f;
-        public static final int bFormulario=0x7f050013;
+        public static final int bFormulario=0x7f050012;
         public static final int bOkFormulario=0x7f05000c;
         public static final int bSacarFoto=0x7f050011;
-        public static final int bSubir=0x7f050012;
-        public static final int bUbicacion=0x7f050014;
+        public static final int bSubir=0x7f050014;
+        public static final int bUbicacion=0x7f050013;
         public static final int ePassword=0x7f05000e;
         public static final int eUsuario=0x7f05000d;
         public static final int fragment1=0x7f050005;
