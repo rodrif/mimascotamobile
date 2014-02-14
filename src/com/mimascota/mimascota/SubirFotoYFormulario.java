@@ -164,10 +164,8 @@ public class SubirFotoYFormulario extends Fragment {
 			mpEntity.addPart("jsonString", new StringBody(jsonString));
 			httppost.setEntity(mpEntity);
 			httpclient.execute(httppost);
-			AlertDialog.Builder cartel = new AlertDialog.Builder(
-					this.getActivity());
-			cartel.setMessage("Gracias por enviar!!!");
-			cartel.show();
+			Toast.makeText(this.getActivity(),
+					"Gracias por enviar!!!", Toast.LENGTH_SHORT).show();
 
 		} catch (Exception e) {
 			Log.d("InputStream", e.getLocalizedMessage());
@@ -265,7 +263,7 @@ public class SubirFotoYFormulario extends Fragment {
 			}
 
 			Toast.makeText(this.getActivity(),
-					"Lat: " + latitude + "\n" + "Lng: " + longitude + "\n",
+					"Lat: " + latitude + "\n" + "Lng: " + longitude,
 					Toast.LENGTH_SHORT).show();
 		}
 	}
