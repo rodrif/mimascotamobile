@@ -59,19 +59,27 @@ public class SubirFotoYFormulario extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_subir_foto, container,
 				false);
+
+		Log.d("MiMascota", "onCreateView Finalizado");
+		return view;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle state) {
+		super.onActivityCreated(state);
 		
-		ImageView imageView = (ImageView) view.findViewById(R.id.vFoto);
+		ImageView imageView = (ImageView) getActivity().findViewById(R.id.vFoto);
 		if(imageView == null) {
-			Log.d("MiMascota", "image view onCreateView null");
+			Log.d("MiMascota", "image view null");
 		}
 		else {
-			Log.d("MiMascota", "imageWith inicial onCreateView = " + String.valueOf(imageView.getWidth()));
-			Log.d("MiMascota", "imageHeight inicial onCreateView = " + String.valueOf(imageView.getHeight()));
+			Log.d("MiMascota", "imageWith inicial onActivityCreated = " + String.valueOf(imageView.getWidth()));
+			Log.d("MiMascota", "imageHeight inicial onActivityCreated = " + String.valueOf(imageView.getHeight()));
 		}
-
-		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
-		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
-		final Button buttonFormulario = (Button) view.findViewById(R.id.bFormulario);
+		
+		final Button buttonSFoto = (Button) getView().findViewById(R.id.bSacarFoto);
+		final Button buttonSubir = (Button) getView().findViewById(R.id.bSubir);
+		final Button buttonFormulario = (Button) getView().findViewById(R.id.bFormulario);
 		
 		buttonSFoto.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -91,23 +99,6 @@ public class SubirFotoYFormulario extends Fragment {
 			}
 
 		});
-
-		Log.d("MiMascota", "onCreateView Finalizado");
-		return view;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle state) {
-		super.onActivityCreated(state);
-		
-		ImageView imageView = (ImageView) getActivity().findViewById(R.id.vFoto);
-		if(imageView == null) {
-			Log.d("MiMascota", "image view null");
-		}
-		else {
-			Log.d("MiMascota", "imageWith inicial onActivityCreated = " + String.valueOf(imageView.getWidth()));
-			Log.d("MiMascota", "imageHeight inicial onActivityCreated = " + String.valueOf(imageView.getHeight()));
-		}
 		
 		Log.d("MiMascota", " activity created");
 	}
@@ -213,8 +204,8 @@ public class SubirFotoYFormulario extends Fragment {
 				Log.d("MiMascota", "image view null");
 			}
 			else {
-				Log.d("MiMascota", "imageWith inicial = " + String.valueOf(imageView.getWidth()));
-				Log.d("MiMascota", "imageHeight inicial = " + String.valueOf(imageView.getHeight()));
+				Log.d("MiMascota", "imageWith inicial onActivityResult = " + String.valueOf(imageView.getWidth()));
+				Log.d("MiMascota", "imageHeight inicial onActivityResult = " + String.valueOf(imageView.getHeight()));
 			}
 			// Check if the result includes a thumbnail Bitmap
 			if (data != null) {	//no me acuerdo por que esta este if
