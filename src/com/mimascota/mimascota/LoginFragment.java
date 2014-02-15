@@ -1,28 +1,16 @@
 package com.mimascota.mimascota;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class LoginFragment extends Fragment {
@@ -52,24 +40,28 @@ public class LoginFragment extends Fragment {
 	 @Override
 	    public View onCreateView(LayoutInflater inflater,
 	                             ViewGroup container,
-	                             Bundle savedInstanceState) {	 
-	        View view = inflater.inflate(R.layout.fragment_login, container, false);
-	        
-	        final Button buttonConectar = (Button) view.findViewById(R.id.bConectar);
-			eMail = (EditText)view.findViewById(R.id.eUsuario);
-			ePassword = (EditText)view.findViewById(R.id.ePassword);
-	        
-	        buttonConectar.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					onClickConectar(v);
-				}
-			});	        
+	                             Bundle savedInstanceState) {	
+		 
+	        View view = inflater.inflate(R.layout.fragment_login, container, false);	        
+     
 	        return view;
 	    }
 	 
 	    @Override
 	    public void onActivityCreated(Bundle state) {
 	        super.onActivityCreated(state);	 
+	        
+		 	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+		 	
+	        final Button buttonConectar = (Button) this.getView().findViewById(R.id.bConectar);
+			eMail = (EditText)this.getView().findViewById(R.id.eUsuario);
+			ePassword = (EditText)this.getView().findViewById(R.id.ePassword);
+	        
+	        buttonConectar.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					onClickConectar(v);
+				}
+			});
 	    }
 	    
 	private void onClickConectar(View v) {
