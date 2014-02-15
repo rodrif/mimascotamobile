@@ -28,12 +28,18 @@ public class FormularioFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_formulario, container,
 				false);
+		return view;
+	}
 
-		final Button buttonOk = (Button) view.findViewById(R.id.bOkFormulario);
-		eNombre = (EditText) view.findViewById(R.id.tNombre);
-		eColor = (EditText) view.findViewById(R.id.tColor);
-		eDescripcion = (EditText) view.findViewById(R.id.tDescripcion);
-		eRaza = (Spinner) view.findViewById(R.id.tBreed);
+	@Override
+	public void onActivityCreated(Bundle state) {
+		super.onActivityCreated(state);
+
+		final Button buttonOk = (Button) getView().findViewById(R.id.bOkFormulario);
+		eNombre = (EditText) getView().findViewById(R.id.tNombre);
+		eColor = (EditText) getView().findViewById(R.id.tColor);
+		eDescripcion = (EditText) getView().findViewById(R.id.tDescripcion);
+		eRaza = (Spinner) getView().findViewById(R.id.tBreed);
 		
 		ArrayAdapter<CharSequence> adapterRaza = ArrayAdapter.createFromResource(
 				getActivity(), R.array.valores_razas,
@@ -49,14 +55,7 @@ public class FormularioFragment extends Fragment {
 				onClickOk(v);
 			}
 		});
-
-		return view;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle state) {
-		super.onActivityCreated(state);
-
+		
 	}
 
 	private void onClickOk(View v) {

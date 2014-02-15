@@ -54,23 +54,24 @@ public class LoginFragment extends Fragment {
 	    public View onCreateView(LayoutInflater inflater,
 	                             ViewGroup container,
 	                             Bundle savedInstanceState) {	 
-	        View view = inflater.inflate(R.layout.fragment_login, container, false);
-	        
-	        final Button buttonConectar = (Button) view.findViewById(R.id.bConectar);
-			eMail = (EditText)view.findViewById(R.id.eUsuario);
-			ePassword = (EditText)view.findViewById(R.id.ePassword);
-	        
-	        buttonConectar.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					onClickConectar(v);
-				}
-			});	        
+	        View view = inflater.inflate(R.layout.fragment_login, container, false);    
+       
 	        return view;
 	    }
 	 
 	    @Override
 	    public void onActivityCreated(Bundle state) {
 	        super.onActivityCreated(state);	 
+	        
+	        final Button buttonConectar = (Button) getView().findViewById(R.id.bConectar);
+			eMail = (EditText)getView().findViewById(R.id.eUsuario);
+			ePassword = (EditText)getView().findViewById(R.id.ePassword);
+	        
+	        buttonConectar.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					onClickConectar(v);
+				}
+			});	 	        
 	    }
 	    
 	private void onClickConectar(View v) {

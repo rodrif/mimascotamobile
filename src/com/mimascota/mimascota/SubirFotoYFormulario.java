@@ -59,13 +59,17 @@ public class SubirFotoYFormulario extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_subir_foto, container,
 				false);
+		return view;
+	}
 
-		final Button buttonSFoto = (Button) view.findViewById(R.id.bSacarFoto);
-		final Button buttonSubir = (Button) view.findViewById(R.id.bSubir);
-		final Button buttonFormulario = (Button) view
-				.findViewById(R.id.bFormulario);
-		final Button buttonUbicacion = (Button) view
-				.findViewById(R.id.bUbicacion);
+	@Override
+	public void onActivityCreated(Bundle state) {
+		super.onActivityCreated(state);
+
+		final Button buttonSFoto = (Button) getView().findViewById(R.id.bSacarFoto);
+		final Button buttonSubir = (Button) getView().findViewById(R.id.bSubir);
+		final Button buttonFormulario = (Button) getView().findViewById(R.id.bFormulario);
+		final Button buttonUbicacion = (Button) getView().findViewById(R.id.bUbicacion);
 
 		buttonUbicacion.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -91,15 +95,7 @@ public class SubirFotoYFormulario extends Fragment {
 				onClickFormulario(v);
 			}
 
-		});
-
-		return view;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle state) {
-		super.onActivityCreated(state);
-
+		});		
 	}
 
 	private void onClickUbicacion(View v) {
@@ -154,7 +150,7 @@ public class SubirFotoYFormulario extends Fragment {
 				}
 
 				Log.d("InputStream", "StringOnClickSubir" + jsonString);
-
+				
 				// 1. create HttpClient
 				HttpClient httpclient = new DefaultHttpClient();
 				httpclient.getParams().setParameter(
@@ -174,6 +170,8 @@ public class SubirFotoYFormulario extends Fragment {
 						Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
 				Log.d("InputStream", e.getLocalizedMessage());
+				Toast.makeText(this.getActivity(), "Error de conexion con servidor",
+						Toast.LENGTH_SHORT).show();				
 			}
 		} else {
 			String msg = "";
