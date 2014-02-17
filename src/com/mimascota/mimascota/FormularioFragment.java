@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,7 +35,8 @@ public class FormularioFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
-
+		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 		final Button buttonOk = (Button) getView().findViewById(R.id.bOkFormulario);
 		eNombre = (EditText) getView().findViewById(R.id.tNombre);
 		eColor = (EditText) getView().findViewById(R.id.tColor);

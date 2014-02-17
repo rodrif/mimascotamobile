@@ -17,7 +17,7 @@ public class MapaFragment extends Fragment {
 
  @Override
  public void onActivityCreated(Bundle state) {
-     super.onActivityCreated(state);	 
+     super.onActivityCreated(state); 
 
  }
 

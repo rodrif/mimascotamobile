@@ -20,8 +20,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -65,6 +65,8 @@ public class SubirFotoYFormulario extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
+		
+		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		final Button buttonSFoto = (Button) getView().findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) getView().findViewById(R.id.bSubir);

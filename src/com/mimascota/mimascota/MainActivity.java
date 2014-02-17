@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements LoginFragment.Inte
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);		
 
 		LoginFragment nuevoFragment = new LoginFragment();
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
