@@ -13,8 +13,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,6 +32,7 @@ public class LoginFragment extends Fragment {
 	private EditText eMail;
 	private EditText ePassword;
 	private int userId = -1;
+	private ProgressDialog pDialog = null;
 
 	InterfaceLogin mCallback;
 
@@ -70,50 +73,14 @@ public class LoginFragment extends Fragment {
 	}
 
 	private void onClickConectar(View v) {
-		String sMail = eMail.getText().toString();
-		String sPassword = ePassword.getText().toString();
-
-		JSONObject jsonObject = new JSONObject();
-
-		if (!Constantes.saltearLogin) {
-			try {
-				jsonObject.put("email", sMail);
-				jsonObject.put("password", sPassword);
-
-				json = jsonObject.toString();
-
-				// 1. create HttpClient
-				HttpClient httpclient = new DefaultHttpClient();
-				httpclient.getParams().setParameter(
-						CoreProtocolPNames.PROTOCOL_VERSION,
-						HttpVersion.HTTP_1_1);
-				HttpPost httppost = new HttpPost("http://"
-						+ Constantes.IPSERVER + ":3000/observador/loginCelular");
-				MultipartEntity mpEntity = new MultipartEntity();
-				mpEntity.addPart("jsonString", new StringBody(json));
-
-				httppost.setEntity(mpEntity);
-
-				HttpResponse resp = httpclient.execute(httppost);
-				HttpEntity ent = resp.getEntity();// y obtenemos una respuesta
-				String text = EntityUtils.toString(ent);
-				Log.d("MiMascota", "Respuesta login: " + text);
-				userId = Integer.parseInt(text);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			if (userId > 0) {// solo si el usuario es valido
-				mCallback.Loguear(userId);
-			} else {
-				Toast.makeText(this.getActivity(),
-						"Usuario o Password incorrectos", Toast.LENGTH_SHORT)
-						.show();
-			}
-		} else {
-			mCallback.Loguear(1);
-		}
+		pDialog = new ProgressDialog(getActivity());
+        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pDialog.setMessage("Procesando...");
+        pDialog.setCancelable(false);
+        pDialog.setMax(100);
+ 
+		LoginAsincronico lAsincronico = new LoginAsincronico();
+		lAsincronico.execute(null, null, null);		
 	}
 
 	@Override
@@ -168,5 +135,77 @@ public class LoginFragment extends Fragment {
 	        ePassword.setText(inState.getString("password"));
 	    }
 	}
+
+
+private class LoginAsincronico extends AsyncTask<Void, Void, Integer> {	 
+    @Override
+    protected Integer doInBackground(Void... params) {
+		String sMail = eMail.getText().toString();
+		String sPassword = ePassword.getText().toString();
+
+		JSONObject jsonObject = new JSONObject();
+
+		if (!Constantes.saltearLogin) {
+			try {
+				jsonObject.put("email", sMail);
+				jsonObject.put("password", sPassword);
+
+				json = jsonObject.toString();
+
+				// 1. create HttpClient
+				HttpClient httpclient = new DefaultHttpClient();
+				httpclient.getParams().setParameter(
+						CoreProtocolPNames.PROTOCOL_VERSION,
+						HttpVersion.HTTP_1_1);
+				HttpPost httppost = new HttpPost("http://"
+						+ Constantes.IPSERVER + ":3000/observador/loginCelular");
+				MultipartEntity mpEntity = new MultipartEntity();
+				mpEntity.addPart("jsonString", new StringBody(json));
+
+				httppost.setEntity(mpEntity);
+
+				HttpResponse resp = httpclient.execute(httppost);
+				HttpEntity ent = resp.getEntity();// y obtenemos una respuesta
+				String text = EntityUtils.toString(ent);
+				Log.d("MiMascota", "Respuesta login: " + text);
+	//			userId = Integer.parseInt(text);
+				return Integer.parseInt(text);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			//mCallback.Loguear(1);
+			return 1;
+		}
+		return -1;
+
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+    	pDialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(Integer Result) {
+    	pDialog.dismiss();
+    	userId = Result;    	
+		if (userId > 0) {// solo si el usuario es valido
+			mCallback.Loguear(userId);
+		} else {
+			Toast.makeText(getActivity(),
+					"Usuario o Password incorrectos", Toast.LENGTH_SHORT)
+					.show();
+		}
+    }
+
+    @Override
+    protected void onCancelled() {
+
+    }
+}
 
 }
