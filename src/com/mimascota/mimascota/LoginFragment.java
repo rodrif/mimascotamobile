@@ -125,12 +125,17 @@ public class LoginFragment extends Fragment {
 
 	private void populateViewForOrientation(LayoutInflater inflater,
 			ViewGroup viewGroup) {
+		
+		String contenidoEmail = eMail.getText().toString();
+		String contenidoPass = ePassword.getText().toString();
 		viewGroup.removeAllViewsInLayout();
 		inflater.inflate(R.layout.fragment_login, viewGroup);
 
 		// Find your buttons in subview, set up onclicks, set up callbacks to
 		// your parent fragment or activity here.
 		setearBotones();
+		eMail.setText(contenidoEmail);
+		ePassword.setText(contenidoPass);
 		// You can create ViewHolder or separate method for that.
 		// example of accessing views: TextView textViewExample = (TextView)
 		// view.findViewById(R.id.text_view_example);
