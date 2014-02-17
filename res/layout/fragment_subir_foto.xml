@@ -1,44 +1,48 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context=".SubirFotoYFormulario" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ImageView
-        android:id="@+id/vFoto"
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="179dp"
-        android:adjustViewBounds="false"
-        android:contentDescription="@string/FotoASubir"
-        android:src="@drawable/perro" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        tools:context=".SubirFotoYFormulario" >
 
-    <Button
-        android:id="@+id/bSacarFoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/SacarFoto" />
+        <ImageView
+            android:id="@+id/vFoto"
+            android:layout_width="match_parent"
+            android:layout_height="179dp"
+            android:adjustViewBounds="false"
+            android:contentDescription="@string/FotoASubir"
+            android:src="@drawable/perro" />
 
-    <Button
-        android:id="@+id/bFormulario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/LlenarFormulario" />
+        <Button
+            android:id="@+id/bSacarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/SacarFoto" />
 
-    <Button
-        android:id="@+id/bUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Ubicacion" />
-    
-     <Button
-        android:id="@+id/bSubir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Subir" />   
+        <Button
+            android:id="@+id/bFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/LlenarFormulario" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/bUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ubicacion" />
+
+        <Button
+            android:id="@+id/bSubir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Subir" />
+    </LinearLayout>
+</ScrollView>

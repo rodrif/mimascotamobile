@@ -66,7 +66,9 @@ public class SubirFotoYFormulario extends Fragment {
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
 		
-		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		getActivity().setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
 
 		final Button buttonSFoto = (Button) getView().findViewById(R.id.bSacarFoto);
 		final Button buttonSubir = (Button) getView().findViewById(R.id.bSubir);
