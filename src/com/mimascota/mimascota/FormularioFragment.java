@@ -64,7 +64,7 @@ public class FormularioFragment extends Fragment {
 		String sNombre = eNombre.getText().toString();
 		String sColor = eColor.getText().toString();
 		String sDescripcion = eDescripcion.getText().toString();
-		String sRaza = eRaza.toString();
+		String sRaza = eRaza.getSelectedItem().toString();
 
 		JSONObject jsonObject = new JSONObject();
 		try {

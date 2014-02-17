@@ -2,6 +2,7 @@ package com.mimascota.mimascota;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -139,7 +140,7 @@ public class SubirFotoYFormulario extends Fragment {
 					// harcodeo si no se lleno el formulario
 					jsonObject = new JSONObject();
 					jsonObject.put("age", "20");
-					jsonObject.put("breed", "agagaegfag");
+					jsonObject.put("breed", "Beagle");
 					jsonObject.put("user_id", this.userId);
 					jsonObject.put("color", "agagaegfag");
 					jsonObject.put("description", "agagaegfag");
@@ -246,6 +247,21 @@ public class SubirFotoYFormulario extends Fragment {
 				factoryOptions.inPurgeable = true;
 				Bitmap bitmap = BitmapFactory.decodeFile(
 						outputFileUri.getPath(), factoryOptions);
+				///////////////////////////
+				String filename = "pippo.jpg";
+//				File sd = Environment.getExternalStorageDirectory();
+				File dest = new File(outputFileUri.getPath());
+
+//				Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+				try {
+				     FileOutputStream out = new FileOutputStream(dest);
+				     bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+				     out.flush();
+				     out.close();
+				} catch (Exception e) {
+				     e.printStackTrace();
+				}
+				//////////////////////////
 				imageView.setImageBitmap(bitmap);
 				Log.d("MiMascota", "imagen entera cargada");				
 			}
