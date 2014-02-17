@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -17,15 +19,18 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -45,6 +50,7 @@ public class SubirFotoYFormulario extends Fragment {
 	private boolean llenoFormulario = false;
 	private boolean llenoUbicacion = false;
 	private boolean sacoFoto = false;
+	ProgressDialog pDialog = null;
 
 	public void setUserId(int userId) {
 		this.userId = userId;
@@ -129,19 +135,23 @@ public class SubirFotoYFormulario extends Fragment {
 	}
 
 	public void onClickSubir(View Boton) {
+		pDialog = new ProgressDialog(getActivity());
+        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pDialog.setMessage("Procesando...");
+        pDialog.setCancelable(false);
+        pDialog.setMax(100);
+        
 		if (llenoUbicacion && llenoFormulario && sacoFoto || Constantes.debug) {
 			Log.d("InputStream", "onClick");
 			String jsonString = "";
-			File ruta_sd = Environment.getExternalStorageDirectory();
-			String miFoto = ruta_sd.getAbsolutePath() + "/test.jpg";
 			try {
 				JSONObject jsonObject;
-				if (this.datosPerro == null) {
+				if (datosPerro == null) {
 					// harcodeo si no se lleno el formulario
 					jsonObject = new JSONObject();
 					jsonObject.put("age", "20");
 					jsonObject.put("breed", "Beagle");
-					jsonObject.put("user_id", this.userId);
+					jsonObject.put("user_id", userId);
 					jsonObject.put("color", "agagaegfag");
 					jsonObject.put("description", "agagaegfag");
 					jsonObject.put("name", "Juan2");
@@ -150,53 +160,36 @@ public class SubirFotoYFormulario extends Fragment {
 					jsonObject.put("gmaps", "true");
 					jsonString = jsonObject.toString();
 				} else {
-					datosPerro.put("user_id", this.userId);
+					datosPerro.put("user_id", userId);
 					jsonString = datosPerro.toString();
 				}
 
 				Log.d("InputStream", "StringOnClickSubir" + jsonString);
-				
-				// 1. create HttpClient
-				HttpClient httpclient = new DefaultHttpClient();
-				httpclient.getParams().setParameter(
-						CoreProtocolPNames.PROTOCOL_VERSION,
-						HttpVersion.HTTP_1_1);
-				HttpPost httppost = new HttpPost("http://"
-						+ Constantes.IPSERVER
-						+ ":3000/cargador/subirPerroBuscado");
-				File file = new File(miFoto);
-				MultipartEntity mpEntity = new MultipartEntity();
-				ContentBody foto = new FileBody(file, "image/jpeg");
-				mpEntity.addPart("fotoUp", foto);
-				mpEntity.addPart("jsonString", new StringBody(jsonString));
-				httppost.setEntity(mpEntity);
-				httpclient.execute(httppost);
-				Toast.makeText(this.getActivity(), "Gracias por enviar!!!",
-						Toast.LENGTH_SHORT).show();
-			} catch (Exception e) {
-				Log.d("InputStream", e.getLocalizedMessage());
-				Toast.makeText(this.getActivity(), "Error de conexion con servidor",
-						Toast.LENGTH_SHORT).show();				
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
+
+			SubirAsincronico sAsincronico = new SubirAsincronico();
+			sAsincronico.execute(jsonString);
+
 		} else {
 			String msg = "";
 			int cant = 0;
-			if(!llenoFormulario) {
+			if (!llenoFormulario) {
 				msg = "Falta llenar el formulario";
 				cant++;
 			}
-			if(!sacoFoto) {
-				if(cant > 0)
+			if (!sacoFoto) {
+				if (cant > 0)
 					msg += "\n";
 				msg += "Falta sacar foto";
 			}
-			if(!llenoUbicacion) {
-				if(cant > 0)
+			if (!llenoUbicacion) {
+				if (cant > 0)
 					msg += "\n";
 				msg += "Falta llenar ubicacion";
-			}				
-			Toast.makeText(this.getActivity(), msg,
-					Toast.LENGTH_SHORT).show();			
+			}
+			Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -247,12 +240,12 @@ public class SubirFotoYFormulario extends Fragment {
 				factoryOptions.inPurgeable = true;
 				Bitmap bitmap = BitmapFactory.decodeFile(
 						outputFileUri.getPath(), factoryOptions);
-				///////////////////////////
-				String filename = "pippo.jpg";
-//				File sd = Environment.getExternalStorageDirectory();
-				File dest = new File(outputFileUri.getPath());
+				imageView.setImageBitmap(bitmap);
 
-//				Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+				//Achico la imagen a mandar al servidor
+				scaleFactor = Math.min(imageWidth / Constantes.webWidth, imageHeight/ Constantes.webHeight);
+				bitmap = BitmapFactory.decodeFile(outputFileUri.getPath(), factoryOptions);	
+				File dest = new File(outputFileUri.getPath());
 				try {
 				     FileOutputStream out = new FileOutputStream(dest);
 				     bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
@@ -261,8 +254,8 @@ public class SubirFotoYFormulario extends Fragment {
 				} catch (Exception e) {
 				     e.printStackTrace();
 				}
-				//////////////////////////
-				imageView.setImageBitmap(bitmap);
+
+				
 				Log.d("MiMascota", "imagen entera cargada");				
 			}
 		}
@@ -313,5 +306,57 @@ public class SubirFotoYFormulario extends Fragment {
 					Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+	private class SubirAsincronico extends AsyncTask<String, Void, Integer> {	 
+	    @Override
+	    protected Integer doInBackground(String... params) {
+			File ruta_sd = Environment.getExternalStorageDirectory();
+			String miFoto = ruta_sd.getAbsolutePath() + "/test.jpg";
+				try {
+					// 1. create HttpClient
+					HttpClient httpclient = new DefaultHttpClient();
+					httpclient.getParams().setParameter(
+							CoreProtocolPNames.PROTOCOL_VERSION,
+							HttpVersion.HTTP_1_1);
+					HttpPost httppost = new HttpPost("http://"
+							+ Constantes.IPSERVER
+							+ ":3000/cargador/subirPerroPerdido");
+					File file = new File(miFoto);
+					MultipartEntity mpEntity = new MultipartEntity();
+					ContentBody foto = new FileBody(file, "image/jpeg");
+					mpEntity.addPart("fotoUp", foto);
+					mpEntity.addPart("jsonString", new StringBody(params[0]));
+					httppost.setEntity(mpEntity);
+					httpclient.execute(httppost);
+					return 0;
+				} catch (Exception e) {
+					Log.d("InputStream", e.getLocalizedMessage());		
+				}
+			return -1;
+	    }
+
+
+	    @Override
+	    protected void onPreExecute() {
+	    	pDialog.show();				
+		}
+
+	    @Override
+	    protected void onPostExecute(Integer Result) {
+	    	pDialog.dismiss();
+	    	if(Result == 0)
+	    		Toast.makeText(getActivity(), "Gracias por enviar!!!",
+	    				Toast.LENGTH_SHORT).show();
+	    	else
+	    		Toast.makeText(getActivity(), "Error de conexion con servidor",
+	    				Toast.LENGTH_SHORT).show();	
+	    }
+
+	    @Override
+	    protected void onCancelled() {
+
+	    }
+
+	}	
 
 }
