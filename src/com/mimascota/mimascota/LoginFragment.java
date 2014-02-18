@@ -12,6 +12,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.google.android.gms.internal.ha.e;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
@@ -80,7 +82,7 @@ public class LoginFragment extends Fragment {
         pDialog.setMax(100);
  
 		LoginAsincronico lAsincronico = new LoginAsincronico();
-		lAsincronico.execute(null, null, null);		
+		lAsincronico.execute();		
 	}
 
 	@Override
@@ -137,20 +139,23 @@ public class LoginFragment extends Fragment {
 	}
 
 
-private class LoginAsincronico extends AsyncTask<Void, Void, Integer> {	 
+private class LoginAsincronico extends AsyncTask<Void, Void, Integer> {	
+	private String sMail2 = "";
+	private String sPassword2 = "";
+	
     @Override
     protected Integer doInBackground(Void... params) {
-		String sMail = eMail.getText().toString();
-		String sPassword = ePassword.getText().toString();
 
 		JSONObject jsonObject = new JSONObject();
 
 		if (!Constantes.saltearLogin) {
 			try {
-				jsonObject.put("email", sMail);
-				jsonObject.put("password", sPassword);
+				jsonObject.put("email", sMail2);
+				jsonObject.put("password", sPassword2);
 
 				json = jsonObject.toString();
+				
+				Log.d("MiMascota", "Mando login: " + json);
 
 				// 1. create HttpClient
 				HttpClient httpclient = new DefaultHttpClient();
@@ -173,10 +178,11 @@ private class LoginAsincronico extends AsyncTask<Void, Void, Integer> {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.d("MiMascota", "Exepcion al enviar login: " + e.getMessage());
 			}
 
 		} else {
-			//mCallback.Loguear(1);
+			//mCallback.Loguear(1);			
 			return 1;
 		}
 		return -1;
@@ -186,6 +192,8 @@ private class LoginAsincronico extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected void onPreExecute() {
+    	sMail2 = eMail.getText().toString();
+    	sPassword2 = ePassword.getText().toString();
     	pDialog.show();
     }
 
