@@ -149,12 +149,12 @@ public class SubirFotoYFormulario extends Fragment {
 				if (datosPerro == null) {
 					// harcodeo si no se lleno el formulario
 					jsonObject = new JSONObject();
-					jsonObject.put("age", "20");
+					jsonObject.put("age", "99");
 					jsonObject.put("breed", "Beagle");
 					jsonObject.put("user_id", userId);
-					jsonObject.put("color", "agagaegfag");
-					jsonObject.put("description", "agagaegfag");
-					jsonObject.put("name", "Juan2");
+					jsonObject.put("color", "blanco");
+					jsonObject.put("description", "con manchas negras");
+					jsonObject.put("name", "Juan");
 					jsonObject.put("latitude", "10.4198");
 					jsonObject.put("longitude", "10.3012");
 					jsonObject.put("gmaps", "true");
@@ -277,7 +277,7 @@ public class SubirFotoYFormulario extends Fragment {
 				}
 
 				// FIXME harcodeo un par de datos que no estan en el formulario
-				this.datosPerro.put("age", "20");
+				this.datosPerro.put("age", "99");
 				this.datosPerro.put("gmaps", "true");
 
 				Log.d("MiMascota", jsonString);
