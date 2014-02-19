@@ -18,7 +18,7 @@ import android.widget.Spinner;
 
 public class FormularioFragment extends Fragment {
 	private String json = "";
-	private EditText eNombre;
+//	private EditText eNombre;
 	private EditText eColor;
 	private EditText eDescripcion;
 	private Spinner eRaza;
@@ -38,7 +38,7 @@ public class FormularioFragment extends Fragment {
 		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		final Button buttonOk = (Button) getView().findViewById(R.id.bOkFormulario);
-		eNombre = (EditText) getView().findViewById(R.id.tNombre);
+//		eNombre = (EditText) getView().findViewById(R.id.tNombre);
 		eColor = (EditText) getView().findViewById(R.id.tColor);
 		eDescripcion = (EditText) getView().findViewById(R.id.tDescripcion);
 		eRaza = (Spinner) getView().findViewById(R.id.tBreed);
@@ -61,14 +61,14 @@ public class FormularioFragment extends Fragment {
 	}
 
 	private void onClickOk(View v) {
-		String sNombre = eNombre.getText().toString();
+//		String sNombre = eNombre.getText().toString();
 		String sColor = eColor.getText().toString();
 		String sDescripcion = eDescripcion.getText().toString();
 		String sRaza = eRaza.getSelectedItem().toString();
 
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put("name", sNombre);
+//			jsonObject.put("name", sNombre);
 			jsonObject.put("color", sColor);
 			jsonObject.put("description", sDescripcion);
 			jsonObject.put("breed", sRaza);

@@ -161,6 +161,7 @@ public class SubirFotoYFormulario extends Fragment {
 					jsonString = jsonObject.toString();
 				} else {
 					datosPerro.put("user_id", userId);
+					datosPerro.put("name", "Juan");
 					jsonString = datosPerro.toString();
 				}
 

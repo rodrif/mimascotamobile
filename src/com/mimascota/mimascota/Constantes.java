@@ -2,7 +2,7 @@ package com.mimascota.mimascota;
 
 
 public class Constantes {
-	static String IPSERVER = "192.168.1.37";
+	static String IPSERVER = "192.168.1.35";
 	static int viewerWidth = 256; //Para achicar la imagen que se ve en el celular.
 	static int viewerHeight = 179; //Para achicar la imagen que se ve en el celular.
 	static int webWidth = 270; //Para achicar la imagen a mandar al server.
